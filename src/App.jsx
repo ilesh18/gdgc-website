@@ -8,6 +8,7 @@ import WebDTeam from "./pages/WebDTeam";
 import AllEvents from "./pages/AllEventsPage";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
 import Footer from "./Components/Footer/Footer";
+import AboutUs from "./pages/AboutUs";
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/tech" element={<Tech />} />
                     <Route path="/teams/tech/webDTeam" element={<WebDTeam />} />
                     <Route path="/allEvents" element={<AllEvents />} />
+                    <Route path="/about" element={<AboutUs />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </main>

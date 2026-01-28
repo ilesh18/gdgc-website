@@ -186,6 +186,9 @@ function MobileNavBar() {
                         <MobileNavLink to="/contact" onNavigate={closeMenu}>
                             Contact
                         </MobileNavLink>
+                        <MobileNavLink to="/about" onNavigate={closeMenu}>
+                            About
+                        </MobileNavLink>
                     </div>
 
                     <div className="p-4">

@@ -1,7 +1,4 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 export default function AboutUs() {
   return (
     <div className="w-full min-h-screen bg-white p-6 md:p-12 flex flex-col items-center">
