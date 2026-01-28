@@ -9,10 +9,11 @@ import {
 } from "@/shadcn/ui/navigation-menu";
 
 import { cn } from "@/shadcn/lib/utils";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "@/shadcn/styles/neobrutalism.css";
 import { Button } from "@/shadcn/ui/button.jsx";
 import { ExternalLink } from "lucide-react";
+import { useScrollContext } from "@/context/ScrollContext";
 
 const techDomainLinks = [
     {
@@ -73,7 +74,7 @@ function ListItem({ className, title, children, href, ...props }) {
                     to={href}
                     className={cn(
                         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                        className
+                        className,
                     )}
                     {...props}
                 >
@@ -90,10 +91,39 @@ function ListItem({ className, title, children, href, ...props }) {
 }
 
 function DesktopNavBar() {
+    const { scrollToTop, scrollToEvents, scrollToFooter } = useScrollContext();
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+
+    const handleHomeClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToTop();
+        }
+    };
+
+    const handleEventsClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToEvents();
+        }
+    };
+
+    const handleContactClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToFooter();
+        }
+    };
+
     return (
         <nav className="hidden lg:flex items-center justify-between w-full h-12 px-8 py-4 bg-white">
             {/* Logo */}
-            <Link to="/" className="flex items-center">
+            <Link
+                to="/"
+                className="flex items-center"
+                onClick={handleHomeClick}
+            >
                 <img
                     src="/GDG Logo.svg"
                     alt="GDG Logo"
@@ -111,7 +141,9 @@ function DesktopNavBar() {
                             asChild
                             className={navigationMenuTriggerStyle()}
                         >
-                            <Link to="/">Home</Link>
+                            <Link to="/" onClick={handleHomeClick}>
+                                Home
+                            </Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
 
@@ -158,7 +190,12 @@ function DesktopNavBar() {
                             asChild
                             className={navigationMenuTriggerStyle()}
                         >
-                            <Link to="/events">Events</Link>
+                            <Link
+                                to={isHome ? "/" : "/#events-section"}
+                                onClick={handleEventsClick}
+                            >
+                                Events
+                            </Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
 
@@ -167,7 +204,12 @@ function DesktopNavBar() {
                             asChild
                             className={navigationMenuTriggerStyle()}
                         >
-                            <Link to="/contact">Contact</Link>
+                            <Link
+                                to={isHome ? "/" : "/#footer"}
+                                onClick={handleContactClick}
+                            >
+                                Contact
+                            </Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
 

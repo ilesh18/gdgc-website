@@ -138,7 +138,7 @@ export default function MobileFooter() {
                                     </li>
                                     <li>
                                         <Link
-                                            to="/events"
+                                            to="/#events-section"
                                             className="hover:text-white"
                                         >
                                             Events
@@ -146,7 +146,7 @@ export default function MobileFooter() {
                                     </li>
                                     <li>
                                         <Link
-                                            to="/contact"
+                                            to="/#footer"
                                             className="hover:text-white"
                                         >
                                             Contact

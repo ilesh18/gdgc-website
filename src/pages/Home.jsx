@@ -1,13 +1,18 @@
 import React from "react";
 import HeroSection from "@/Components/HeroSection/HeroSectionContainer.jsx";
 import EventsSectionContainer from "@/Components/EventsSection/EventsSectionContainer.jsx";
-import MembersPanel from '@/Components/memberspanel/memberspanel.jsx'
+import MembersPanel from "@/Components/memberspanel/memberspanel.jsx";
+import { useScrollContext } from "@/context/ScrollContext";
 
 function Home() {
+    const { eventsRef } = useScrollContext();
+
     return (
         <>
             <HeroSection />
-            <EventsSectionContainer />
+            <div ref={eventsRef} id="events-section">
+                <EventsSectionContainer />
+            </div>
             <MembersPanel />
         </>
     );

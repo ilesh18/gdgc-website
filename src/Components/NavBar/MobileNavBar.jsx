@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MenuIcon, XIcon } from "lucide-react";
 
 import {
@@ -13,6 +13,7 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from "@/shadcn/ui/collapsible";
+import { useScrollContext } from "@/context/ScrollContext";
 
 const navItems = [
     {
@@ -50,7 +51,7 @@ const navItems = [
             {
                 title: "Videography and Photography Team",
                 href: "/teams/nonTech/videoPhotographyTeam",
-            }
+            },
         ],
     },
     {
@@ -65,11 +66,14 @@ const navItems = [
     },
 ];
 
-function MobileNavLink({ to, children, onNavigate }) {
+function MobileNavLink({ to, children, onNavigate, onClick }) {
     return (
         <Link
             to={to}
-            onClick={onNavigate}
+            onClick={(e) => {
+                onClick?.(e);
+                onNavigate();
+            }}
             className="flex items-center justify-between py-3 px-3 text-base font-medium text-foreground border-b border-border"
         >
             {children}
@@ -91,8 +95,37 @@ function MobileSubLink({ to, children, onNavigate }) {
 
 function MobileNavBar() {
     const [open, setOpen] = useState(false);
+    const { scrollToTop, scrollToEvents, scrollToFooter } = useScrollContext();
+    const location = useLocation();
+    const isHome = location.pathname === "/";
 
     const closeMenu = () => setOpen(false);
+
+    const handleEventsClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToEvents();
+        }
+    };
+
+    const handleHomeClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToTop();
+        }
+    };
+
+    const handleLogoClick = (e) => {
+        handleHomeClick(e);
+        closeMenu();
+    };
+
+    const handleContactClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            scrollToFooter();
+        }
+    };
 
     return (
         <div className="lg:hidden">
@@ -106,7 +139,7 @@ function MobileNavBar() {
                     <Link
                         to="/"
                         className="flex items-center gap-2"
-                        onClick={closeMenu}
+                        onClick={handleLogoClick}
                     >
                         <img
                             src="/GDG Logo.svg"
@@ -134,11 +167,19 @@ function MobileNavBar() {
                 {/* Dropdown Panel (slides from under navbar) */}
                 <CollapsibleContent className="absolute left-0 right-0 top-full z-50 bg-background border-2 border-black border-t-0 border-l-0 border-r-0 shadow-md">
                     <div className="px-3">
-                        <MobileNavLink to="/" onNavigate={closeMenu}>
+                        <MobileNavLink
+                            to="/"
+                            onNavigate={closeMenu}
+                            onClick={handleHomeClick}
+                        >
                             Home
                         </MobileNavLink>
 
-                        <Accordion type="single" collapsible className="border-b border-border">
+                        <Accordion
+                            type="single"
+                            collapsible
+                            className="border-b border-border"
+                        >
                             <AccordionItem value="tech">
                                 <AccordionTrigger className="px-3 py-3 text-base">
                                     Tech Domain
@@ -165,7 +206,8 @@ function MobileNavBar() {
                                 <AccordionContent className="pb-2">
                                     {navItems
                                         .find(
-                                            (x) => x.title === "Non-Tech Domain"
+                                            (x) =>
+                                                x.title === "Non-Tech Domain",
                                         )
                                         ?.subItems?.map((sub) => (
                                             <MobileSubLink
@@ -180,10 +222,18 @@ function MobileNavBar() {
                             </AccordionItem>
                         </Accordion>
 
-                        <MobileNavLink to="/events" onNavigate={closeMenu}>
+                        <MobileNavLink
+                            to={isHome ? "/" : "/#events-section"}
+                            onNavigate={closeMenu}
+                            onClick={handleEventsClick}
+                        >
                             Events
                         </MobileNavLink>
-                        <MobileNavLink to="/contact" onNavigate={closeMenu}>
+                        <MobileNavLink
+                            to={isHome ? "/" : "/#footer"}
+                            onNavigate={closeMenu}
+                            onClick={handleContactClick}
+                        >
                             Contact
                         </MobileNavLink>
                         <MobileNavLink to="/about" onNavigate={closeMenu}>
