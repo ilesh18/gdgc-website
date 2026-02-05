@@ -1,5 +1,4 @@
 import { motion, useScroll, useSpring, useTransform } from 'motion/react'
-import { GlobalNavbar } from "@/Advitya26Components/Navbar";
 
 const ParallaxBackground = () => {
   const { scrollYProgress } = useScroll();
@@ -13,11 +12,6 @@ const ParallaxBackground = () => {
 
   return (
       <div className='relative h-screen overflow-y-hidden bg-[#fdfbd4] overflow-x-hidden'>
-        <div className='absolute top-0 left-0 w-full h-[10vh] z-100'>
-             <GlobalNavbar />
-            </div>
-            
-
         {/* Golden Bridge */}
         <motion.div
             style={{ x: bridge }}
@@ -113,8 +107,6 @@ const ParallaxBackground = () => {
                 // transition={{ duration: 2, ease: "easeInOut" }}
             />
         </motion.div>
-
-
     </div>
   )
 }
