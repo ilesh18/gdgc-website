@@ -127,7 +127,6 @@ const ScrollLinkedSection = () => {
         <img src={wheel} alt="wheel" className="wheel right-wheel" />
       </div>
       <div className="panels-row">
-        <div className="left-panel">
         <div className="vision-card">
           <h2 className="vision-title">Our Vision</h2>
           <div className="vision-content">
@@ -147,9 +146,7 @@ const ScrollLinkedSection = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="right-panel">
         <div className="profiles-container" ref={containerRef}>
           <div className="scroll-spacer-top"></div>
           {teamData.map((member, index) => (
@@ -196,7 +193,6 @@ const ScrollLinkedSection = () => {
           <div className="scroll-spacer-bottom"></div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
