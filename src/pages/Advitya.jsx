@@ -96,13 +96,13 @@ function Advitya() {
                 </section>
 
                 {/* Gallery Section - Horizontal scroll triggered by vertical scroll */}
-                <section
+                {/* <section
                     id="gallery-section"
                     className="relative w-full"
                     style={{ zIndex: 1 }}
                 >
                     <AdvityaGallery3D />
-                </section>
+                </section> */}
 
                 {/* Footer Section */}
                 <AdvityaFooter />
