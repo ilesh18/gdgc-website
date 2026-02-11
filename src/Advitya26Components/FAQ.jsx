@@ -141,13 +141,13 @@ const AsteriskIcon = ({ color }) => {
 };
 
 const FAQCard = ({ question, answer, iconColor }) => (
-  <div className="border border-white/100 rounded-lg p-3 md:p-12 flex items-center gap-4 md:gap-12 bg-transparent hover:bg-white/5 transition-colors w-full max-w-10xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
+  <div className="border border-white/100 rounded-lg p-3 md:p-6 flex items-center gap-4 md:gap-8 bg-transparent hover:bg-white/5 transition-colors w-full max-w-10xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
     <div className="flex-shrink-0">
       <AsteriskIcon color={iconColor} />
     </div>
     <div>
-      <h3 className="text-white font-bold text-base md:text-3xl mb-1 md:mb-4">{question}</h3>
-      <p className="text-white/90 text-xs md:text-xl font-normal">{answer}</p>
+      <h3 className="text-white font-bold text-base md:text-xl mb-1 md:mb-2">{question}</h3>
+      <p className="text-white/90 text-xs md:text-base font-normal">{answer}</p>
     </div>
   </div>
 );
@@ -167,7 +167,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="w-screen h-auto md:h-screen bg-[#0a0a0a] relative flex flex-col overflow-hidden" style={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div className="w-screen h-auto md:h-screen bg-[#0a0a0a] relative flex flex-col overflow-hidden isolate" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Grid Background */}
       <div
         className="absolute inset-0 z-0"
@@ -218,8 +218,8 @@ export default function FAQ() {
 
       {/* Content */}
       <div className="relative z-10 px-4 md:px-28 pt-2 pb-2 md:pb-4 flex-1 overflow-y-auto">
-        <div className="space-y-2 md:space-y-6">
-          <h2 className="text-white text-lg md:text-4xl font-medium mb-3 md:mb-8 uppercase">
+        <div className="space-y-2 md:space-y-4">
+          <h2 className="text-white text-lg md:text-2xl font-medium mb-3 md:mb-4 uppercase">
             {activeTab}
           </h2>
           {faqData[activeTab].map((faq, index) => (
